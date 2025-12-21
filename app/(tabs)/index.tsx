@@ -34,7 +34,7 @@ export default function Index() {
             </View>
           </View>
         </View>
-        <View className="flex justify-center items-center mt-[20]">
+        <View className="ml-8 mr-8 flex justify-center items-center mt-[20]">
           <SearchBar />
         </View>
         <View className="ml-8 mr-8 flex flex-row justify-between items-center mt-[30]">

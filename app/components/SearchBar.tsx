@@ -16,8 +16,6 @@ export default function SearchBar() {
           borderWidth: 2,
           width: 350,
           height: 60,
-          marginRight: 20,
-          marginLeft: 20
         }}
       />
     </View>
