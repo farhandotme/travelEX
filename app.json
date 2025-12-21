@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "travel_ui",
+    "name": "Travel EX",
     "slug": "travel_ui",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -9,31 +9,31 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.travel-ui"
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE"
-
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.anonymous.travel_ui"
     },
     "web": {
       "output": "static"
     },
     "plugins": [
-      "expo-router",
       [
         "expo-splash-screen",
         {
+          "backgroundColor": "black",
           "image": "./assets/images/splashScreen.jpeg",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff",
           "dark": {
+            "image": "./assets/images/splashScreen.jpeg",
             "backgroundColor": "black"
-          }
+          },
+          "imageWidth": 200
         }
       ]
     ],
