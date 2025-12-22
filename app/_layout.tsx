@@ -1,6 +1,6 @@
 import { useFonts } from 'expo-font';
-
 import { Stack } from "expo-router";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function RootLayout() {
 
@@ -12,10 +12,13 @@ export default function RootLayout() {
     return null;
   }
   return (
-    <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="index" />
-      <Stack.Screen name="onBoarding" />
-      <Stack.Screen name="(tabs)" />
-    </Stack>
+    <GestureHandlerRootView>
+
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="index" />
+        <Stack.Screen name="onBoarding" />
+        <Stack.Screen name="(tabs)" />
+      </Stack>
+    </GestureHandlerRootView>
   );
 }

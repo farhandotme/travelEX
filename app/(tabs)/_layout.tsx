@@ -10,14 +10,18 @@ const TabsLayout = () => {
     <Tabs
       screenOptions={{
         tabBarShowLabel: false,
+        headerShown: false,
         tabBarStyle: {
           height: 70,
           marginHorizontal: 20,
-          marginVertical: 30,
+          // marginVertical: 30,
           paddingTop: 13,
+          marginBottom: 30,
+          // paddingBottom: 40,
           position: "absolute",
           borderRadius: 100,
           borderTopColor: "white",
+          elevation: 0,
         }
       }}
     >

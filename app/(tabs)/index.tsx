@@ -14,7 +14,7 @@ export default function Index() {
   const categories = ["Most Viewed", "Latest", "Nearby"]
 
   return (
-    <SafeAreaView className="h-screen bg-white">
+    <SafeAreaView edges={["top"]} className="h-screen bg-white">
       <ScrollView>
         <View className="flex-1 ml-8 mr-8 justify-center items-center max-h-20 mt-4">
           <View className="flex flex-row justify-between items-center">
