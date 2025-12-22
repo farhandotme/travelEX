@@ -1,5 +1,6 @@
-import React from 'react'
-import { TextInput, View } from 'react-native'
+import React from 'react';
+import { TextInput, View } from 'react-native';
+import { scale } from "../utils/scale";
 
 export default function SearchBar() {
   return (
@@ -8,14 +9,14 @@ export default function SearchBar() {
         placeholder="Search places"
         placeholderTextColor={"#BFBFBF"}
         style={{
-          backgroundColor: "",
-          padding: 10,
-          paddingLeft: 20,
-          borderRadius: 20,
+
+          padding: scale(10),
+          paddingLeft: scale(20),
+          borderRadius: scale(20),
           borderColor: "#BFBFBF",
           borderWidth: 2,
-          width: 350,
-          height: 60,
+          width: scale(350),
+          height: scale(60),
         }}
       />
     </View>
