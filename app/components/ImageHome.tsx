@@ -35,8 +35,8 @@ const ImageHome: React.FC<imageDetails> = ({ imageUrl, placeName, place }) => {
           className="w-[300px] h-[400px]"
           imageStyle={{ borderRadius: 30 }}
         >
-          <View className="justify-end items-end mt-5 mr-5 bg-[#1D1D1D] opacity-40 self-end p-2 rounded-full">
-            <Pressable className='' onPress={handleLike}><Ionicons name={isliked ? "heart" : "heart-outline"} color={isliked ? "red" : "white"} size={36} /></Pressable>
+          <View className="justify-end items-end mt-5 mr-5 bg-[#929191] self-end p-2 rounded-full">
+            <Pressable className='' onPress={handleLike}><Ionicons name={isliked ? "heart" : "heart-outline"} color={isliked ? "#ff3030" : "white"} size={36} /></Pressable>
           </View>
           <View className="flex-1 items-center justify-end">
             <BlurView intensity={30} className="bg-blue-400 w-[220px] h-[70px] mb-10 rounded-xl" style={{ borderRadius: 12, overflow: "hidden" }}>

@@ -5,7 +5,9 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 export default function RootLayout() {
 
   const [fontsLoaded] = useFonts({
-    StoryScript: require("../assets/fonts/StoryScript-Regular.ttf")
+    StoryScript: require("../assets/fonts/StoryScript-Regular.ttf"),
+    NovaRound: require("../assets/fonts/NovaRound-Regular.ttf"),
+    MonomaniacOne: require("../assets/fonts/MonomaniacOne-Regular.ttf")
   })
 
   if (!fontsLoaded) {
