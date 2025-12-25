@@ -8,6 +8,7 @@ const Profile = () => {
       <View className='flex items-center'>
         <Text style={{ fontSize: 20, fontFamily: "StoryScript" }}>This is a Demo App</Text>
         <Text style={{ fontSize: 20, fontFamily: "StoryScript" }}>Currently have no users</Text>
+        <Text style={{ fontSize: 20, fontFamily: "StoryScript" }}>Comming Soon</Text>
       </View>
     </SafeAreaView >
   )

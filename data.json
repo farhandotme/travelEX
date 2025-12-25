@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "image": "https://images.unsplash.com/photo-1603011836628-554a4c507ed2?q=80&w=670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "place": "Maghalaya",
+    "placeName": "Laitlum Canyon, Shillong"
+  },
+  {
+    "id": 2,
+    "image": "https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcRU4p2Kuk4q4zpvNoXoSjkH4zvrB0_6ZwR4WnW1b-FJ_ymcQSFnBVMo1Gw49bUkTXrOY_eiFFS-hqjRXx56-4Gonng&s=19",
+    "place": "Jammu and Kashmir",
+    "placeName": "Gulmarg"
+  },
+  {
+    "id": 3,
+    "image": "https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcREi_6W84QQ0C68Efd5DLjDrUnFcTbC2gdPfmD-YnCCXhqtc9ldhDNILC3B244k5wReI8f5ybC8lW8iHUTPx2MiABU&s=19",
+    "place": "Himachal Pradesh",
+    "placeName": "Shimla"
+  },
+  {
+    "id": 4,
+    "image": "https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcQrpwXFtQJsmoanphilRNbJQolZ74m6pWbeOxG_TK-AB6V6qUwFF3O7pwB85HsDT4g3u3_qQLT-hc6mzDtgdFmwWZ8&s=19",
+    "place": "Kerala",
+    "placeName": "Munnar"
+  },
+  {
+    "id": 5,
+    "image": "https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcSullzLVgHQYVJqZowHLNGrNZrIzfRtd_-aAcPDfn0gZrap-nKI1MwhmUqIKBdpyq6qvQX4TEc6GfnlwUE-kCAdDug&s=19",
+    "place": "Tamil Nadu",
+    "placeName": "Ooty"
+  }
+]
