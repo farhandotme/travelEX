@@ -1,4 +1,3 @@
-
 import { Link } from "expo-router";
 import { useState } from "react";
 import { Image, ScrollView, Text, View } from "react-native";
@@ -22,6 +21,7 @@ export default function Index() {
 
   return (
     <SafeAreaView edges={["top"]} className="h-screen bg-white">
+
       <ScrollView>
         <View className="flex-1 ml-8 mr-8 justify-center items-center max-h-20 mt-4">
           <View className="flex flex-row justify-between items-center">
@@ -48,20 +48,17 @@ export default function Index() {
           <Text style={{ fontSize: 20, fontWeight: "bold" }} >Popular Places</Text>
           <Link href={`/`} style={{ color: "grey", fontWeight: "bold" }}>View All</Link>
         </View>
-
         <ScrollView horizontal contentContainerStyle={{ gap: 10, paddingHorizontal: 25, height: 60 }} showsHorizontalScrollIndicator={false} className=" mt-10" >
           {categories.map((item) => {
             return (
               <SelectCategory key={item} items={item} tab={tab} setTab={setTab} />
             )
           })}
-
         </ScrollView>
-
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 25, paddingHorizontal: 25 }} className="mt-10">
           {
             mainData.map((value) => {
-              return <ImageHome key={value.id} imageUrl={value.image} placeName={value.placeName} place={value.place} />
+              return <ImageHome key={value.id} id={value.id} imageUrl={value.image} placeName={value.placeName} place={value.place} />
             })
           }
         </ScrollView>
