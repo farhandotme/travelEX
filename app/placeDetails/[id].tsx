@@ -39,13 +39,28 @@ const MovieDetails = () => {
                 shadowOpacity: 0.4,
                 shadowRadius: 20,
               }} >
-                <View className='flex flex-row m-5 justify-between'>
-                  <Pressable onPress={() => { router.back() }}><BlurView className='p-3' style={{ borderRadius: 40, overflow: "hidden" }} >
-                    <Ionicons name='chevron-back-outline' size={25} color={"white"} />
-                  </BlurView></Pressable>
-                  <Pressable onPress={() => { alert("Saved Successfully") }}><BlurView className='p-3' style={{ borderRadius: 40, overflow: "hidden" }} >
-                    <Ionicons name='receipt-outline' size={25} color={"white"} />
-                  </BlurView></Pressable>
+                <View className='flex-1 justify-between'>
+                  <View className='flex flex-row m-5 justify-between'>
+                    <Pressable onPress={() => { router.back() }}><BlurView className='p-3' style={{ borderRadius: 40, overflow: "hidden" }} >
+                      <Ionicons name='chevron-back-outline' size={25} color={"white"} />
+                    </BlurView></Pressable>
+                    <Pressable onPress={() => { alert("Saved Successfully") }}><BlurView className='p-3' style={{ borderRadius: 40, overflow: "hidden" }} >
+                      <Ionicons name='receipt-outline' size={25} color={"white"} />
+                    </BlurView></Pressable>
+                  </View>
+                  <BlurView className='flex m-10 bg-red-500 h-[100px] rounded-3xl' style={{ borderRadius: 20, overflow: 'hidden', }}>
+                    <View className='flex flex-row justify-between items-baseline'>
+                      <Text numberOfLines={1} ellipsizeMode="tail" className='text-white mt-5 ml-7 mr-7 ' style={{ fontWeight: "bold", fontSize: 22 }}>{placeData?.placeName}</Text>
+                      <Text className='text-gray-300 mt-5 ml-7 mr-7 ' style={{ fontWeight: "600", }}>Price</Text>
+                    </View>
+                    <View className='flex flex-row justify-between items-center'>
+                      <View className='flex-row items-center ml-5 mt-3 gap-1'>
+                        <Ionicons name='location-outline' size={22} color={"white"} className='' />
+                        <Text className='text-white ' style={{ fontWeight: "light", fontSize: 18 }}>{placeData?.place}</Text>
+                      </View>
+                      <View className='mr-7 mt-3'><Text className='text-gray-400 text-[15px]'>₹ {placeData?.price}</Text></View>
+                    </View>
+                  </BlurView>
                 </View>
               </ImageBackground>
             </View>
