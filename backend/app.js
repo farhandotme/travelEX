@@ -1,0 +1,34 @@
+import express from "express";
+import connectdb from "./db/dbConifg.js";
+import userModel from "./models/userModels.js";
+
+const app = express();
+
+app.use(express.json());
+connectdb();
+
+const port = process.env.PORT || 3000;
+
+app.get("/", (req, res) => {
+  res.json({
+    message: "Welcome to travel EX server",
+  });
+});
+
+app.post("/register", async (req, res) => {
+  try {
+    const data = req.body;
+    const existingUser = await userModel.findOne({ email: data.email });
+    if (existingUser) {
+      return res.status(400).json({
+        message: "User Already Registered",
+      });
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+app.listen(port, () => {
+  console.log(`Server is running in the port ${port}`);
+});
