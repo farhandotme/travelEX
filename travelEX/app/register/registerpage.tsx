@@ -1,4 +1,10 @@
-import { Pressable, Text, TextInput, View } from "react-native";
+import {
+  ActivityIndicator,
+  Pressable,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import "../../global.css";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Checkbox } from "expo-checkbox";
@@ -26,9 +32,13 @@ export default function App() {
       password: "",
     },
   });
+  const [loading, setLoading] = useState(false);
+
+  console.log(loading);
 
   //handle submit
   const Submit = async (data: SchemaFormData): Promise<void> => {
+    setLoading(true);
     try {
       const res = await axios.post("http://192.168.29.211:3000/register", data);
       Toast.show({
@@ -41,10 +51,11 @@ export default function App() {
       Toast.show({
         type: "error",
         text1: error?.response?.data?.message,
-        text2: "You are Very Welcome to our Application",
+        text2: "The email you have given is Already in use",
       });
       console.log(error?.response?.data);
     }
+    setLoading(false);
   };
 
   const [isChecked, setChecked] = useState(false);
@@ -172,7 +183,13 @@ export default function App() {
             onPress={handleSubmit(Submit)}
             className="flex flex-row justify-center  bg-black p-5 rounded-2xl"
           >
-            <Text className="text-white font-bold">Sign Up</Text>
+            {loading ? (
+              <ActivityIndicator size={17} />
+            ) : (
+              <Text className="text-white font-bold">Sign Up</Text>
+            )}
+
+            {/* <Text className="text-white font-bold">Sign Up</Text> */}
           </Pressable>
         </View>
       </View>
