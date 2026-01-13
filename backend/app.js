@@ -1,7 +1,9 @@
 import express from "express";
 import connectdb from "./db/dbConifg.js";
 import userModel from "./models/userModels.js";
+import bcrypt from "bcrypt";
 
+import jwt from "jsonwebtoken";
 const app = express();
 
 app.use(express.json());
@@ -21,11 +23,26 @@ app.post("/register", async (req, res) => {
     const existingUser = await userModel.findOne({ email: data.email });
     if (existingUser) {
       return res.status(400).json({
-        message: "User Already Registered",
+        message: "Email Already Registered",
       });
     }
+
+    const hashedPassword = await bcrypt.hash(data.password, 10);
+
+    const newUser = await userModel.create({
+      name: data.name,
+      email: data.email,
+      password: hashedPassword,
+    });
+    const token = await jwt.sign({ id: newUser._id }, "secret");
+
+    res.status(200).json({
+      message: "Registered Successfully",
+      token,
+      newUser,
+    });
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({ error });
   }
 });
 

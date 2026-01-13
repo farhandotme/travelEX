@@ -38,19 +38,9 @@ export default function App() {
       const res = await axios.post("http://192.168.29.211:3000/register", data);
       console.log(res.data);
     } catch (error: any) {
-      console.log(error.response?.data);
+      console.log(error?.response?.data);
     }
   };
-
-  // const Submit = async (data: SchemaFormData): Promise<void> => {
-  //   try {
-  //     const res = await axios.post("http://192.168.29.211:3000/register", data);
-
-  //     console.log(res.data.message);
-  //   } catch (error: any) {
-  //     console.log(error.response?.data?.message || "Something went wrong");
-  //   }
-  // };
 
   const [isChecked, setChecked] = useState(false);
 
