@@ -2,7 +2,7 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-
+import Toast from "react-native-toast-message";
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
     StoryScript: require("../assets/fonts/StoryScript-Regular.ttf"),
@@ -22,6 +22,7 @@ export default function RootLayout() {
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="register/registerpage" />
       </Stack>
+      <Toast />
     </GestureHandlerRootView>
   );
 }

@@ -34,7 +34,7 @@ app.post("/register", async (req, res) => {
       email: data.email,
       password: hashedPassword,
     });
-    const token = await jwt.sign({ id: newUser._id }, "secret");
+    const token = jwt.sign({ id: newUser._id }, "secret");
 
     res.status(200).json({
       message: "Registered Successfully",

@@ -1,10 +1,4 @@
-import {
-  Pressable,
-  Text,
-  TextInput,
-  View,
-  KeyboardAvoidingView,
-} from "react-native";
+import { Pressable, Text, TextInput, View } from "react-native";
 import "../../global.css";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Checkbox } from "expo-checkbox";
@@ -16,6 +10,7 @@ import { SchemaFormData, SignUpSchema } from "../Schemas/SignupSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
+import Toast from "react-native-toast-message";
 export default function App() {
   const [passVisible, setPassVisible] = useState(true);
 
@@ -36,8 +31,18 @@ export default function App() {
   const Submit = async (data: SchemaFormData): Promise<void> => {
     try {
       const res = await axios.post("http://192.168.29.211:3000/register", data);
+      Toast.show({
+        type: "success",
+        text1: res.data.message,
+        text2: "You are Very Welcome to our Application",
+      });
       console.log(res.data);
     } catch (error: any) {
+      Toast.show({
+        type: "error",
+        text1: error?.response?.data?.message,
+        text2: "You are Very Welcome to our Application",
+      });
       console.log(error?.response?.data);
     }
   };
