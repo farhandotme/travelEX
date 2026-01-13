@@ -6,17 +6,21 @@ import {
   View,
 } from "react-native";
 import "../../global.css";
+
+import * as SecureStore from "expo-secure-store";
+
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Checkbox } from "expo-checkbox";
 import Feather from "@expo/vector-icons/Feather";
 import { Controller, useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomTextInput from "../components/CustomTextInput";
 import { SchemaFormData, SignUpSchema } from "../Schemas/SignupSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
 import Toast from "react-native-toast-message";
+import { router } from "expo-router";
 export default function App() {
   const [passVisible, setPassVisible] = useState(true);
 
@@ -34,26 +38,32 @@ export default function App() {
   });
   const [loading, setLoading] = useState(false);
 
-  console.log(loading);
-
   //handle submit
   const Submit = async (data: SchemaFormData): Promise<void> => {
     setLoading(true);
+    if (!isChecked) {
+      Toast.show({
+        type: "info",
+        text1: "Please Accept Our Terms and Conditions",
+      });
+      setLoading(false);
+      return;
+    }
     try {
       const res = await axios.post("http://192.168.29.211:3000/register", data);
+      await SecureStore.setItemAsync("authToken", res.data.token);
+      router.replace("/(tabs)");
       Toast.show({
         type: "success",
         text1: res.data.message,
         text2: "You are Very Welcome to our Application",
       });
-      console.log(res.data);
     } catch (error: any) {
       Toast.show({
         type: "error",
         text1: error?.response?.data?.message,
         text2: "The email you have given is Already in use",
       });
-      console.log(error?.response?.data);
     }
     setLoading(false);
   };
@@ -167,7 +177,7 @@ export default function App() {
               color={isChecked ? "#23D600" : undefined}
             />
 
-            <Text>Remember me</Text>
+            <Text>Terms and Conditions</Text>
           </View>
           <View>
             <Pressable onPress={() => {}}>

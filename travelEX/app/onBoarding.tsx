@@ -1,16 +1,26 @@
 import { LinearGradient } from "expo-linear-gradient";
-import { useRouter } from "expo-router";
+import { Redirect, useRouter } from "expo-router";
 import { useEffect } from "react";
 import { Image, Text, View } from "react-native";
 import "../global.css";
+
+import * as SecureStore from "expo-secure-store";
 import { scale } from "./utils/scale";
 export default function OnBoarding() {
   const router = useRouter();
 
-  useEffect(() => {
+  const getAuthToken = async () => {
+    const token = await SecureStore.getItemAsync("authToken");
     setTimeout(() => {
-      router.replace("/register/registerpage");
+      if (token) {
+        router.replace("/(tabs)");
+      } else {
+        router.replace("/register/registerpage");
+      }
     }, 3000);
+  };
+  useEffect(() => {
+    getAuthToken();
   });
 
   return (
