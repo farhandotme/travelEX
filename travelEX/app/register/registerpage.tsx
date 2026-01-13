@@ -55,7 +55,7 @@ export default function App() {
   const [isChecked, setChecked] = useState(false);
 
   return (
-    <SafeAreaView className="bg-white h-screen mt-5">
+    <SafeAreaView className="bg-white flex-1 mt-5">
       <View className="flex items-center">
         <Text className="text-[20px] font-bold">Sign Up Account</Text>
         <Text className="text-[16px] mt-4 font-semibold text-gray-500">
