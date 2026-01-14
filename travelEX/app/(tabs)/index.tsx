@@ -1,6 +1,6 @@
 import * as SecureStore from "expo-secure-store";
 import { Link, router } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Image, Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import data from "../../data.json";
@@ -8,7 +8,9 @@ import "../../global.css";
 import ImageHome from "../components/ImageHome";
 import SearchBar from "../components/SearchBar";
 import SelectCategory from "../components/selectCategory";
-import { ipv4 } from "zod";
+import { ipv4, set } from "zod";
+import axios from "axios";
+import Toast from "react-native-toast-message";
 export default function Index() {
   type Place = {
     id: number;
@@ -16,10 +18,32 @@ export default function Index() {
     place: string;
     placeName: string;
   };
-
+  type User = {
+    name: string;
+    email: string;
+    _id: string;
+  };
   const mainData: Place[] = data;
   const [tab, setTab] = useState<string>("Most Viewed");
   const categories = ["Most Viewed", "Latest", "Nearby"];
+  const [user, setUser] = useState<User | null>(null);
+  const getUserDetails = async () => {
+    const token = await SecureStore.getItemAsync("authToken");
+    try {
+      const getData = await axios.get(`http://192.168.29.211:3000/profile/me`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setUser(getData.data.user);
+    } catch (error: any) {
+      Toast.show({ type: "error", text1: error?.response?.data?.message });
+    }
+  };
+
+  useEffect(() => {
+    getUserDetails();
+  }, []);
 
   return (
     <SafeAreaView edges={["top"]} className="h-screen bg-white">
@@ -27,7 +51,16 @@ export default function Index() {
         <View className="flex-1 ml-8 mr-8 justify-center items-center max-h-20 mt-4">
           <View className="flex flex-row justify-between items-center">
             <View className="flex-1">
-              <Text className="text-[30px] font-semibold ">Hi, Farhan 👋</Text>
+              {!user ? (
+                <Text className="text-[25px] text-red-500 font-bold">
+                  User Not Found
+                </Text>
+              ) : (
+                <Text className="text-[30px] font-semibold ">
+                  Hi, {user?.name.split(" ")[0]} 👋
+                </Text>
+              )}
+
               <Text className="text-[20px] font-semibold text-gray-400 ">
                 Explore the World
               </Text>
