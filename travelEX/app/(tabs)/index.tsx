@@ -11,6 +11,7 @@ import SelectCategory from "../components/selectCategory";
 import { ipv4, set } from "zod";
 import axios from "axios";
 import Toast from "react-native-toast-message";
+import { randomNumber } from "../utils/randomColorsProfile";
 export default function Index() {
   type Place = {
     id: number;
@@ -23,6 +24,13 @@ export default function Index() {
     email: string;
     _id: string;
   };
+  const [randomColor, setRandomColor] = useState("");
+
+  useEffect(() => {
+    const randomcolor = randomNumber();
+    setRandomColor(randomcolor);
+  }, []);
+
   const mainData: Place[] = data;
   const [tab, setTab] = useState<string>("Most Viewed");
   const categories = ["Most Viewed", "Latest", "Nearby"];
@@ -66,10 +74,14 @@ export default function Index() {
               </Text>
             </View>
             <View>
-              <Image
-                source={require("../../assets/images/profile.jpg")}
-                style={{ width: 50, height: 50, borderRadius: 50 }}
-              />
+              <View
+                className="rounded-full h-[50px] w-[50px] flex justify-center items-center"
+                style={{ backgroundColor: randomColor, opacity: 0.5 }}
+              >
+                <Text className="text-white font-bold text-3xl">
+                  {user?.name.charAt(0)}
+                </Text>
+              </View>
             </View>
           </View>
         </View>
