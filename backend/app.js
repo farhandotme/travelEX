@@ -4,6 +4,7 @@ import userModel from "./models/userModels.js";
 import bcrypt from "bcrypt";
 
 import jwt from "jsonwebtoken";
+import { authMiddlewares } from "./middlewares/authmiddleware.js";
 const app = express();
 
 app.use(express.json());
@@ -43,6 +44,15 @@ app.post("/register", async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ error });
+  }
+});
+
+app.get("/profile/me", authMiddlewares, async (req, res) => {
+  try {
+    const user = userModel.findById(req.userID).select("-password");
+    console.log(user);
+  } catch (error) {
+    res.status(500).json({ message: error });
   }
 });
 
