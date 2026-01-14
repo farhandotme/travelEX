@@ -1,6 +1,6 @@
 import * as SecureStore from "expo-secure-store";
 import { Link, router } from "expo-router";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Image, Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import data from "../../data.json";
@@ -8,11 +8,17 @@ import "../../global.css";
 import ImageHome from "../components/ImageHome";
 import SearchBar from "../components/SearchBar";
 import SelectCategory from "../components/selectCategory";
-import { ipv4, set } from "zod";
+import BottomSheet, {
+  BottomSheetModal,
+  BottomSheetView,
+} from "@gorhom/bottom-sheet";
 import axios from "axios";
 import Toast from "react-native-toast-message";
 import { randomNumber } from "../utils/randomColorsProfile";
+import { Ionicons } from "@expo/vector-icons";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 export default function Index() {
+  const tabBarHeight = useBottomTabBarHeight();
   type Place = {
     id: number;
     image: string;
@@ -26,10 +32,9 @@ export default function Index() {
   };
   const [randomColor, setRandomColor] = useState("");
 
-  useEffect(() => {
-    const randomcolor = randomNumber();
-    setRandomColor(randomcolor);
-  }, []);
+  // bottomsheetconf
+  const bottomSheetRef = useRef<BottomSheet>(null);
+  const snapPoint = useMemo(() => ["30%"], []);
 
   const mainData: Place[] = data;
   const [tab, setTab] = useState<string>("Most Viewed");
@@ -51,10 +56,12 @@ export default function Index() {
 
   useEffect(() => {
     getUserDetails();
+    const randomcolor = randomNumber();
+    setRandomColor(randomcolor);
   }, []);
 
   return (
-    <SafeAreaView edges={["top"]} className="h-screen bg-white">
+    <SafeAreaView edges={["top"]} className="flex-1 bg-white">
       <ScrollView>
         <View className="flex-1 ml-8 mr-8 justify-center items-center max-h-20 mt-4">
           <View className="flex flex-row justify-between items-center">
@@ -74,14 +81,18 @@ export default function Index() {
               </Text>
             </View>
             <View>
-              <View
+              {/* profile */}
+              <Pressable
+                onPress={() => {
+                  bottomSheetRef.current?.expand();
+                }}
                 className="rounded-full h-[50px] w-[50px] flex justify-center items-center"
                 style={{ backgroundColor: randomColor, opacity: 0.5 }}
               >
                 <Text className="text-white font-bold text-3xl">
                   {user?.name.charAt(0)}
                 </Text>
-              </View>
+              </Pressable>
             </View>
           </View>
         </View>
@@ -93,12 +104,11 @@ export default function Index() {
             Popular Places
           </Text>
           <Pressable
-            onPress={async () => {
-              await SecureStore.deleteItemAsync("authToken");
-              router.replace("/register/registerpage");
+            onPress={() => {
+              alert("The backend is not conected ");
             }}
           >
-            <Text style={{ color: "grey", fontWeight: "bold" }}>View All`</Text>
+            <Text style={{ color: "grey", fontWeight: "bold" }}>View All</Text>
           </Pressable>
         </View>
         <ScrollView
@@ -137,6 +147,25 @@ export default function Index() {
           })}
         </ScrollView>
       </ScrollView>
+      <BottomSheet ref={bottomSheetRef} index={-1} snapPoints={snapPoint}>
+        <BottomSheetView
+          style={{ paddingBottom: tabBarHeight + 16 }}
+          className="p-6 bg-white rounded-3xl gap-6"
+        >
+          <Text className="text-xl font-bold text-gray-900">Profile</Text>
+
+          <Pressable
+            onPress={async () => {
+              await SecureStore.deleteItemAsync("authToken");
+              router.replace("/register/registerpage");
+            }}
+            className="flex-row items-center justify-center gap-2 bg-red-500 py-4 rounded-2xl active:opacity-80"
+          >
+            <Ionicons name="log-out-outline" size={22} color="white" />
+            <Text className="text-white font-semibold text-lg">Logout</Text>
+          </Pressable>
+        </BottomSheetView>
+      </BottomSheet>
     </SafeAreaView>
   );
 }

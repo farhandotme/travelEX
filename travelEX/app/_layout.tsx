@@ -1,3 +1,4 @@
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -14,15 +15,17 @@ export default function RootLayout() {
     return null;
   }
   return (
-    <GestureHandlerRootView>
-      <StatusBar style="inverted" />
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="index" />
-        <Stack.Screen name="onBoarding" />
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="register/registerpage" />
-      </Stack>
-      <Toast />
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <BottomSheetModalProvider>
+        <StatusBar style="inverted" />
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="index" />
+          <Stack.Screen name="onBoarding" />
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen name="register/registerpage" />
+        </Stack>
+        <Toast />
+      </BottomSheetModalProvider>
     </GestureHandlerRootView>
   );
 }
